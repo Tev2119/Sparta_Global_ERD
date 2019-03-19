@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e155058aceaa456a8fa0267e5c854017" Name="Diagram1" ZoomLevel="74" >
+        <EntityTypeShape EntityType="Property.Properties" Width="1.5" PointX="2.375" PointY="0.5" />
+        <EntityTypeShape EntityType="Property.Extensions" Width="1.5" PointX="3.625" PointY="3.375" />
+        <EntityTypeShape EntityType="Property.BuildType" Width="1.5" PointX="1.75" PointY="7.125" />
+        <EntityTypeShape EntityType="Property.NumOfRooms" Width="1.5" PointX="0.625" PointY="3.125" />
+        <EntityTypeShape EntityType="Property.PropertyType" Width="1.5" PointX="1.25" PointY="10.5" />
+        <InheritanceConnector EntityType="Property.NumOfRooms" />
+        <InheritanceConnector EntityType="Property.Extensions" />
+        <AssociationConnector Association="Property.BuildTypeExtensions" />
+        <AssociationConnector Association="Property.NumOfRoomsBuildType" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="Property.PropertyTypeBuildType" />
+        <EntityTypeShape EntityType="Property.TypeKitchenSpace" Width="1.5" PointX="18.875" PointY="0.5" />
+        <AssociationConnector Association="Property.PropertiesTypeKitchenSpace" />
+        <EntityTypeShape EntityType="Property.Mansions" Width="1.5" PointX="4.625" PointY="10.75" />
+        <AssociationConnector Association="Property.MansionsPropertyType" />
+        <EntityTypeShape EntityType="Property.Houses" Width="1.5" PointX="3.125" PointY="13.625" />
+        <AssociationConnector Association="Property.HousesPropertyType" />
+        <EntityTypeShape EntityType="Property.Offices" Width="1.5" PointX="0.5" PointY="13.75" />
+        <AssociationConnector Association="Property.OfficesPropertyType" />
+        <EntityTypeShape EntityType="Property.Countries" Width="1.5" PointX="17.125" PointY="1.25" />
+        <AssociationConnector Association="Property.CountriesProperties" />
+        <EntityTypeShape EntityType="Property.Locations" Width="1.5" PointX="18.875" PointY="3.625" />
+        <EntityTypeShape EntityType="Property.Gardens" Width="1.5" PointX="12.25" PointY="3.25" />
+        <AssociationConnector Association="Property.ExtensionsGardens" />
+        <EntityTypeShape EntityType="Property.Conservertories" Width="1.75" PointX="10" PointY="4.625" />
+        <EntityTypeShape EntityType="Property.Porches" Width="1.5" PointX="7.75" PointY="6.25" />
+        <AssociationConnector Association="Property.ExtensionsPorches" />
+        <AssociationConnector Association="Property.ExtensionsConservertories" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,352 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="Property.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="PropertyTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Property" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="PropertyContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Properties" EntityType="Property.Properties" />
+          <EntitySet Name="BuildTypes" EntityType="Property.BuildType" />
+          <EntitySet Name="PropertyTypes" EntityType="Property.PropertyType" />
+          <AssociationSet Name="BuildTypeExtensions" Association="Property.BuildTypeExtensions">
+            <End Role="BuildType" EntitySet="BuildTypes" />
+            <End Role="Extensions" EntitySet="Properties" />
+          </AssociationSet>
+          <AssociationSet Name="NumOfRoomsBuildType" Association="Property.NumOfRoomsBuildType">
+            <End Role="NumOfRooms" EntitySet="Properties" />
+            <End Role="BuildType" EntitySet="BuildTypes" />
+          </AssociationSet>
+          <AssociationSet Name="PropertyTypeBuildType" Association="Property.PropertyTypeBuildType">
+            <End Role="PropertyType" EntitySet="PropertyTypes" />
+            <End Role="BuildType" EntitySet="BuildTypes" />
+          </AssociationSet>
+          <EntitySet Name="TypeKitchenSpaces" EntityType="Property.TypeKitchenSpace" />
+          <AssociationSet Name="PropertiesTypeKitchenSpace" Association="Property.PropertiesTypeKitchenSpace">
+            <End Role="Properties" EntitySet="Properties" />
+            <End Role="TypeKitchenSpace" EntitySet="TypeKitchenSpaces" />
+          </AssociationSet>
+          <EntitySet Name="Mansions" EntityType="Property.Mansions" />
+          <AssociationSet Name="MansionsPropertyType" Association="Property.MansionsPropertyType">
+            <End Role="Mansions" EntitySet="Mansions" />
+            <End Role="PropertyType" EntitySet="PropertyTypes" />
+          </AssociationSet>
+          <EntitySet Name="Houses" EntityType="Property.Houses" />
+          <AssociationSet Name="HousesPropertyType" Association="Property.HousesPropertyType">
+            <End Role="Houses" EntitySet="Houses" />
+            <End Role="PropertyType" EntitySet="PropertyTypes" />
+          </AssociationSet>
+          <EntitySet Name="Offices" EntityType="Property.Offices" />
+          <AssociationSet Name="OfficesPropertyType" Association="Property.OfficesPropertyType">
+            <End Role="Offices" EntitySet="Offices" />
+            <End Role="PropertyType" EntitySet="PropertyTypes" />
+          </AssociationSet>
+          <EntitySet Name="Countries" EntityType="Property.Countries" />
+          <AssociationSet Name="CountriesProperties" Association="Property.CountriesProperties">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Properties" EntitySet="Properties" />
+          </AssociationSet>
+          <EntitySet Name="Locations" EntityType="Property.Locations" />
+          <EntitySet Name="Gardens" EntityType="Property.Gardens" />
+          <AssociationSet Name="ExtensionsGardens" Association="Property.ExtensionsGardens">
+            <End Role="Extensions" EntitySet="Properties" />
+            <End Role="Gardens" EntitySet="Gardens" />
+          </AssociationSet>
+          <EntitySet Name="Conservertories" EntityType="Property.Conservertories" />
+          <EntitySet Name="Porches" EntityType="Property.Porches" />
+          <AssociationSet Name="ExtensionsPorches" Association="Property.ExtensionsPorches">
+            <End Role="Extensions" EntitySet="Properties" />
+            <End Role="Porches" EntitySet="Porches" />
+          </AssociationSet>
+          <AssociationSet Name="ExtensionsConservertories" Association="Property.ExtensionsConservertories">
+            <End Role="Extensions" EntitySet="Properties" />
+            <End Role="Conservertories" EntitySet="Conservertories" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Properties">
+          <Key>
+            <PropertyRef Name="PropertiesID" />
+          </Key>
+          <Property Name="PropertiesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Country" Type="String" Nullable="false" />
+          <Property Name="Location" Type="String" Nullable="false" />
+          <Property Name="Price" Type="String" Nullable="false" />
+          <Property Name="Availability" Type="String" Nullable="false" />
+          <Property Name="TypeKitchenSpace" Type="String" Nullable="false" />
+          <NavigationProperty Name="TypeKitchenSpaces" Relationship="Property.PropertiesTypeKitchenSpace" FromRole="Properties" ToRole="TypeKitchenSpace" />
+          <NavigationProperty Name="Countries" Relationship="Property.CountriesProperties" FromRole="Properties" ToRole="Countries" />
+        </EntityType>
+        <EntityType Name="Extensions" BaseType="Property.Properties">
+          <Property Name="ExtensionsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Garden" Type="String" Nullable="false" />
+          <Property Name="Conservatory" Type="String" Nullable="false" />
+          <Property Name="porch" Type="String" Nullable="false" />
+          <Property Name="SquareAcres" Type="String" Nullable="false" />
+          <NavigationProperty Name="BuildType" Relationship="Property.BuildTypeExtensions" FromRole="Extensions" ToRole="BuildType" />
+          <NavigationProperty Name="Gardens" Relationship="Property.ExtensionsGardens" FromRole="Extensions" ToRole="Gardens" />
+          <NavigationProperty Name="Porches" Relationship="Property.ExtensionsPorches" FromRole="Extensions" ToRole="Porches" />
+          <NavigationProperty Name="Conservertories" Relationship="Property.ExtensionsConservertories" FromRole="Extensions" ToRole="Conservertories" />
+        </EntityType>
+        <EntityType Name="BuildType">
+          <Key>
+            <PropertyRef Name="BuildTypeID" />
+          </Key>
+          <Property Name="BuildTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="victorian" Type="String" Nullable="false" />
+          <Property Name="Modern" Type="String" Nullable="false" />
+          <Property Name="PreVictorian" Type="String" Nullable="false" />
+          <Property Name="Age" Type="String" Nullable="false" />
+          <NavigationProperty Name="Extensions" Relationship="Property.BuildTypeExtensions" FromRole="BuildType" ToRole="Extensions" />
+          <NavigationProperty Name="NumOfRooms" Relationship="Property.NumOfRoomsBuildType" FromRole="BuildType" ToRole="NumOfRooms" />
+          <NavigationProperty Name="PropertyType" Relationship="Property.PropertyTypeBuildType" FromRole="BuildType" ToRole="PropertyType" />
+        </EntityType>
+        <EntityType Name="NumOfRooms" BaseType="Property.Properties">
+          <Property Name="NumOfRoomsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumBedrooms" Type="String" Nullable="false" />
+          <Property Name="NumBathrooms" Type="String" Nullable="false" />
+          <Property Name="NumFloors" Type="String" Nullable="false" />
+          <NavigationProperty Name="BuildType" Relationship="Property.NumOfRoomsBuildType" FromRole="NumOfRooms" ToRole="BuildType" />
+        </EntityType>
+        <EntityType Name="PropertyType">
+          <Key>
+            <PropertyRef Name="PropertyTypeID" />
+          </Key>
+          <Property Name="PropertyTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Mansion" Type="String" Nullable="false" />
+          <Property Name="House" Type="String" Nullable="false" />
+          <Property Name="Ofiices" Type="String" Nullable="false" />
+          <NavigationProperty Name="BuildType" Relationship="Property.PropertyTypeBuildType" FromRole="PropertyType" ToRole="BuildType" />
+          <NavigationProperty Name="Mansions" Relationship="Property.MansionsPropertyType" FromRole="PropertyType" ToRole="Mansions" />
+          <NavigationProperty Name="Houses" Relationship="Property.HousesPropertyType" FromRole="PropertyType" ToRole="Houses" />
+          <NavigationProperty Name="Offices" Relationship="Property.OfficesPropertyType" FromRole="PropertyType" ToRole="Offices" />
+        </EntityType>
+        <Association Name="BuildTypeExtensions">
+          <End Type="Property.BuildType" Role="BuildType" Multiplicity="0..1" />
+          <End Type="Property.Extensions" Role="Extensions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BuildType">
+              <PropertyRef Name="BuildTypeID" />
+            </Principal>
+            <Dependent Role="Extensions">
+              <PropertyRef Name="BuildTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="NumOfRoomsBuildType">
+          <End Type="Property.NumOfRooms" Role="NumOfRooms" Multiplicity="*" />
+          <End Type="Property.BuildType" Role="BuildType" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="BuildType">
+              <PropertyRef Name="BuildTypeID" />
+            </Principal>
+            <Dependent Role="NumOfRooms">
+              <PropertyRef Name="BuildTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PropertyTypeBuildType">
+          <End Type="Property.PropertyType" Role="PropertyType" Multiplicity="1" />
+          <End Type="Property.BuildType" Role="BuildType" Multiplicity="1" />
+        </Association>
+        <EntityType Name="TypeKitchenSpace">
+          <Key>
+            <PropertyRef Name="KitchenSpaceId" />
+          </Key>
+          <Property Name="KitchenSpaceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GalleyKitchen" Type="String" Nullable="false" />
+          <Property Name="IslanKitchen" Type="String" Nullable="false" />
+          <Property Name="LShapedKitchen" Type="String" Nullable="false" />
+          <Property Name="singleWallKitchen" Type="String" Nullable="false" />
+          <Property Name="UShapedKitchen" Type="String" Nullable="false" />
+          <NavigationProperty Name="Property" Relationship="Property.PropertiesTypeKitchenSpace" FromRole="TypeKitchenSpace" ToRole="Properties" />
+        </EntityType>
+        <Association Name="PropertiesTypeKitchenSpace">
+          <End Type="Property.Properties" Role="Properties" Multiplicity="1" />
+          <End Type="Property.TypeKitchenSpace" Role="TypeKitchenSpace" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Properties">
+              <PropertyRef Name="PropertiesID" />
+            </Principal>
+            <Dependent Role="TypeKitchenSpace">
+              <PropertyRef Name="PropertiesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Mansions">
+          <Key>
+            <PropertyRef Name="MansionID" />
+          </Key>
+          <Property Name="MansionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tudor" Type="String" Nullable="false" />
+          <Property Name="FarmHouse" Type="String" Nullable="false" />
+          <Property Name="EnglishMannor" Type="String" Nullable="false" />
+          <Property Name="FrenchNormandy" Type="String" Nullable="false" />
+          <NavigationProperty Name="PropertyType" Relationship="Property.MansionsPropertyType" FromRole="Mansions" ToRole="PropertyType" />
+        </EntityType>
+        <Association Name="MansionsPropertyType">
+          <End Type="Property.Mansions" Role="Mansions" Multiplicity="*" />
+          <End Type="Property.PropertyType" Role="PropertyType" Multiplicity="1" />
+        </Association>
+        <EntityType Name="Houses">
+          <Key>
+            <PropertyRef Name="HousesID" />
+          </Key>
+          <Property Name="HousesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Detached" Type="String" Nullable="false" />
+          <Property Name="SemiDetached" Type="String" Nullable="false" />
+          <Property Name="Terrace" Type="String" Nullable="false" />
+          <Property Name="Flat" Type="String" Nullable="false" />
+          <Property Name="Bungalow" Type="String" Nullable="false" />
+          <NavigationProperty Name="PropertyType" Relationship="Property.HousesPropertyType" FromRole="Houses" ToRole="PropertyType" />
+        </EntityType>
+        <Association Name="HousesPropertyType">
+          <End Type="Property.Houses" Role="Houses" Multiplicity="*" />
+          <End Type="Property.PropertyType" Role="PropertyType" Multiplicity="1" />
+        </Association>
+        <EntityType Name="Offices">
+          <Key>
+            <PropertyRef Name="OfficesID" />
+          </Key>
+          <Property Name="OfficesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OpenPlan" Type="String" Nullable="false" />
+          <Property Name="Cubicle" Type="String" Nullable="false" />
+          <Property Name="HalfPartions" Type="String" Nullable="false" />
+          <Property Name="TeamEncolosures" Type="String" Nullable="false" />
+          <NavigationProperty Name="PropertyType" Relationship="Property.OfficesPropertyType" FromRole="Offices" ToRole="PropertyType" />
+        </EntityType>
+        <Association Name="OfficesPropertyType">
+          <End Type="Property.Offices" Role="Offices" Multiplicity="*" />
+          <End Type="Property.PropertyType" Role="PropertyType" Multiplicity="1" />
+        </Association>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Name="CountryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="England" Type="String" Nullable="false" />
+          <Property Name="France" Type="String" Nullable="false" />
+          <Property Name="Spain" Type="String" Nullable="false" />
+          <Property Name="USA" Type="String" Nullable="false" />
+          <NavigationProperty Name="Property" Relationship="Property.CountriesProperties" FromRole="Countries" ToRole="Properties" />
+        </EntityType>
+        <Association Name="CountriesProperties">
+          <End Type="Property.Countries" Role="Countries" Multiplicity="*" />
+          <End Type="Property.Properties" Role="Properties" Multiplicity="1" />
+        </Association>
+        <EntityType Name="Locations">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Edinbourgh" Type="String" Nullable="false" />
+          <Property Name="Manchester" Type="String" Nullable="false" />
+          <Property Name="Oxford" Type="String" Nullable="false" />
+          <Property Name="Cambridge" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Gardens">
+          <Key>
+            <PropertyRef Name="GardenId" />
+          </Key>
+          <Property Name="GardenId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="YardGarden" Type="String" Nullable="false" />
+          <Property Name="WaterGarden" Type="String" Nullable="false" />
+          <Property Name="GreekGarden" Type="String" Nullable="false" />
+          <Property Name="FrenchGarden" Type="String" Nullable="false" />
+          <NavigationProperty Name="Extension" Relationship="Property.ExtensionsGardens" FromRole="Gardens" ToRole="Extensions" />
+        </EntityType>
+        <Association Name="ExtensionsGardens">
+          <End Type="Property.Extensions" Role="Extensions" Multiplicity="1" />
+          <End Type="Property.Gardens" Role="Gardens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Extensions">
+              <PropertyRef Name="PropertiesID" />
+            </Principal>
+            <Dependent Role="Gardens">
+              <PropertyRef Name="ExtensionsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Conservertories">
+          <Key>
+            <PropertyRef Name="ConservatoryID" />
+          </Key>
+          <Property Name="ConservatoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VictorianConservatory" Type="String" Nullable="false" />
+          <Property Name="EdwardianConservatory" Type="String" Nullable="false" />
+          <Property Name="LanternRoofConservatory" Type="String" Nullable="false" />
+          <Property Name="GableConservatory" Type="String" Nullable="false" />
+          <NavigationProperty Name="ExtensionID" Relationship="Property.ExtensionsConservertories" FromRole="Conservertories" ToRole="Extensions" />
+        </EntityType>
+        <EntityType Name="Porches">
+          <Key>
+            <PropertyRef Name="PorchID" />
+          </Key>
+          <Property Name="PorchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RainPorch" Type="String" Nullable="false" />
+          <Property Name="FarmersPorch" Type="String" Nullable="false" />
+          <Property Name="FrontEntryPorch" Type="String" Nullable="false" />
+          <Property Name="ScreenedPorch" Type="String" Nullable="false" />
+          <NavigationProperty Name="Extension" Relationship="Property.ExtensionsPorches" FromRole="Porches" ToRole="Extensions" />
+        </EntityType>
+        <Association Name="ExtensionsPorches">
+          <End Type="Property.Extensions" Role="Extensions" Multiplicity="1" />
+          <End Type="Property.Porches" Role="Porches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Extensions">
+              <PropertyRef Name="PropertiesID" />
+            </Principal>
+            <Dependent Role="Porches">
+              <PropertyRef Name="ExtensionsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ExtensionsConservertories">
+          <End Type="Property.Extensions" Role="Extensions" Multiplicity="1" />
+          <End Type="Property.Conservertories" Role="Conservertories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Extensions">
+              <PropertyRef Name="PropertiesID" />
+            </Principal>
+            <Dependent Role="Conservertories">
+              <PropertyRef Name="ExtensionsPropertiesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="Property" />
+        <Alias Key="Target" Value="Property.Store" />
+        <EntityContainerMapping CdmEntityContainer="PropertyContainer" StorageEntityContainer="PropertyTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
